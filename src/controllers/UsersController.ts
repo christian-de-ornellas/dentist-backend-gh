@@ -12,10 +12,6 @@ class UserController {
     const user = await User.create(req.body)
     return res.json(user)
   }
-
-  public sum (a: number): number {
-    return a + 2
-  }
 }
 
 export default new UserController()

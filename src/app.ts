@@ -1,6 +1,9 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
+require("dotenv-safe").config();
+import bodyParser from "body-parser";
+
 
 import routes from './routes'
 
@@ -13,6 +16,7 @@ class App {
     this.middlewares()
     this.database()
     this.routes()
+    this.parser()
   }
 
   private middlewares (): void {
@@ -30,6 +34,10 @@ class App {
 
   private routes (): void {
     this.express.use(routes)
+  }
+  private parser (): void {
+    this.express.use(bodyParser.json())
+    this.express.use(bodyParser.urlencoded({extended: true}))
   }
 }
 

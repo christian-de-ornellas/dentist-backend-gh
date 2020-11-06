@@ -2,11 +2,12 @@ const { compilerOptions } = require('./tsconfig.json')
 const { pathsToModuleNameMapper } = require('ts-jest/utils')
 
 module.exports = {
+  // Timeout
+  testTimeout: 190000,
   // All imported modules in your tests should be mocked automatically
   // automock: false,
-
   // Stop running tests after `n` failures
-  // bail: 0,
+  bail: true,
 
   // The directory where Jest should store its cached dependency information
   // cacheDirectory: "/private/var/folders/m7/3yjbp5ds77xb33vt96mwlwq00000gn/T/jest_dx",
@@ -29,12 +30,7 @@ module.exports = {
   // ],
 
   // A list of reporter names that Jest uses when writing coverage reports
-  // coverageReporters: [
-  //   "json",
-  //   "text",
-  //   "lcov",
-  //   "clover"
-  // ],
+  coverageReporters: ['json', 'text', 'lcov', 'clover'],
 
   // An object that configures minimum threshold enforcement for coverage results
   // coverageThreshold: undefined,
@@ -129,7 +125,7 @@ module.exports = {
   // snapshotSerializers: [],
 
   // The test environment that will be used for testing
-  testEnvironment: 'node'
+  testEnvironment: 'node',
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},
@@ -138,10 +134,7 @@ module.exports = {
   // testLocationInResults: false,
 
   // The glob patterns Jest uses to detect test files
-  // testMatch: [
-  //   "**/__tests__/**/*.[jt]s?(x)",
-  //   "**/?(*.)+(spec|test).[tj]s?(x)"
-  // ],
+  testMatch: ['**/__tests__/**/*.ts'],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
   // testPathIgnorePatterns: [
@@ -182,4 +175,9 @@ module.exports = {
 
   // Whether to use watchman for file crawling
   // watchman: true,
+  collectCoverage: true,
+  collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
+  coverageDirectory: 'coverage',
+  coverageReporters: ['text-summary', 'lcov'],
+  collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
 }

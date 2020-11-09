@@ -1,7 +1,7 @@
-# Backend Vistoring App
+# Backend Dentist Form
 
 ## Welcome
-This api aims to serve the app vistoring and organize the actions and data.
+This api aims to serve the Dentist Form and organize the actions and data.
 
 ## Requeriments
 - Docker

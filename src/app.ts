@@ -3,17 +3,14 @@ import { errors } from 'celebrate'
 import cors from 'cors'
 import express from 'express'
 import mongoose from 'mongoose'
-
 import routes from './routes'
-
-require('dotenv-safe').config({ path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env' })
+import * as dotenv from 'dotenv'
 
 class App {
   public express: express.Application
-
   public constructor() {
+    dotenv.config({ path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env' })
     this.express = express()
-
     this.middlewares()
     this.database()
     this.routes()

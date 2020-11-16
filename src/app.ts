@@ -27,16 +27,14 @@ class App {
     const options = {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      useCreateIndex: true,
-      dbName: process.env.DB_NAME,
-      // useFindAndModify: false,
-      // autoIndex: false, // Don't build indexes
-      // poolSize: 10, // Maintain up to 10 socket connections
-      serverSelectionTimeoutMS: 90000, // Keep trying to send operations for 5 seconds
-      // socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
-      // family: 4, // Use IPv4, skip trying IPv6
     }
-    const uri = `mongodb://${process.env.DB_HOST}`
+    const uri =
+      process.env.DB_NAME === 'dentistFormsTest'
+        ? `mongodb://${process.env.DB_TEST}:${process.env.DB_PORT}/${process.env.DB_NAME}`
+        : `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`
+
+    console.log('uri >>> ', uri)
+
     mongoose.connect(uri, options)
   }
 

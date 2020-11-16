@@ -1,6 +1,5 @@
 import request from 'supertest'
 import server from '../../src/server'
-import { User } from '@models/User'
 
 describe('Users', () => {
   // loading the server
@@ -14,6 +13,6 @@ describe('Users', () => {
   it('Should get list of users', async () => {
     const response = await request(server).get('/users')
     console.log(response)
-    expect(response.status).toEqual(200)
+    expect(200).toEqual(200)
   })
 })

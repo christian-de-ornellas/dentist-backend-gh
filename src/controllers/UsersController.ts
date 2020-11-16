@@ -7,7 +7,7 @@ import * as jwt from 'jsonwebtoken'
 class UserController {
   public async index(req: Request, res: Response): Promise<Response> {
     try {
-      const users = await User.find()
+      const users = await User.find().select('-password')
       return res.send(users)
     } catch (e) {
       return res.status(500).send({ error: e.message })
@@ -31,7 +31,7 @@ class UserController {
   public async login(req: Request, res: Response) {
     try {
       const { email, password } = req.body
-      const user = await User.findOne({ email }).select('+password')
+      const user = await User.findOne({ email })
 
       if (!user) {
         return res.status(400).send({ error: 'User not found' })
@@ -40,6 +40,8 @@ class UserController {
       if (!(await bcrypt.compare(password, user.password))) {
         return res.status(400).send({ error: 'Invalid password' })
       }
+
+      user.password = undefined
 
       return res.status(200).send({ user, token: jwt.sign({ user: user._id }, process.env.SECRET, { expiresIn: 86400 }) })
     } catch (e) {

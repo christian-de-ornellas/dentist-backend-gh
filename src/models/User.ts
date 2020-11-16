@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { IUser } from '@interfaces/IUser'
 import * as bcrypt from 'bcryptjs'
 import { Document, Model, model, Schema } from 'mongoose'
@@ -9,10 +8,22 @@ export interface UserModel extends IUser, Document {
 
 const UserSchema = new Schema(
   {
-    email: String,
-    firstName: String,
-    lastName: String,
-    password: String,
+    email: {
+      type: String,
+      required: true,
+    },
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,

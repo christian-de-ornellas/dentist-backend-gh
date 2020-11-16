@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { User } from '@models/User'
 import * as bcrypt from 'bcryptjs'
 import { Request, Response } from 'express'
@@ -16,12 +15,19 @@ class UserController {
 
   public async store(req: Request, res: Response): Promise<Response> {
     try {
-      const { email } = req.body
+      const { email, role } = req.body
+
       if (await User.findOne({ email })) {
         return res.status(400).send({ error: 'User already exists!' })
       }
+
+      if (role != 'admin' && role != 'mod') {
+        return res.status(400).send({ error: 'User role cannot be different from admin or mod!' })
+      }
+
       const user = await User.create(req.body)
       user.password = undefined
+
       res.status(201).send({ user, token: jwt.sign({ user: user._id }, process.env.SECRET, { expiresIn: 86400 }) })
     } catch (e) {
       return res.status(500).send({ error: e.message })

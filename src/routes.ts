@@ -22,8 +22,7 @@ routes.post(
   }),
   UsersController.store
 )
-
-routes.post('/clients', ClientsController.index)
+routes.delete('/users/:id', UsersController.delete)
 
 routes.post(
   '/clients',
@@ -34,15 +33,15 @@ routes.post(
       document: Joi.number(),
       birth: Joi.string(),
       email: Joi.string().required().email(),
-      password: Joi.string().required(),
       phones: Joi.array(),
       father: Joi.string(),
       mother: Joi.string(),
-      responsible: Joi.array(),
       place: Joi.array(),
     }),
   }),
   ClientsController.store
 )
+
+routes.get('/clients', ClientsController.index)
 
 export default routes

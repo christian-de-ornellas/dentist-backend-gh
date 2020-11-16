@@ -3,7 +3,7 @@ import * as bcrypt from 'bcryptjs'
 import { Request, Response } from 'express'
 import * as jwt from 'jsonwebtoken'
 
-class UserController {
+class UsersController {
   public async index(req: Request, res: Response): Promise<Response> {
     try {
       const users = await User.find().select('-password')
@@ -54,6 +54,16 @@ class UserController {
       return res.status(500).send({ error: e.message })
     }
   }
+
+  public async delete(req: Request, res: Response): Promise<Response> {
+    try {
+      await User.findOneAndDelete(req.params.id)
+      return res.status(200).send({ message: 'Is user removed!' })
+    } catch (error) {
+      console.log(error)
+      return res.status(400).send({ error: 'It was not possible to remove the user!' })
+    }
+  }
 }
 
-export default new UserController()
+export default new UsersController()

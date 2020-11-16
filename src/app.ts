@@ -8,6 +8,7 @@ import * as dotenv from 'dotenv'
 
 class App {
   public express: express.Application
+
   public constructor() {
     dotenv.config({ path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env' })
     this.express = express()
@@ -32,8 +33,6 @@ class App {
       process.env.DB_NAME === 'dentistFormsTest'
         ? `mongodb://${process.env.DB_TEST}:${process.env.DB_PORT}/${process.env.DB_NAME}`
         : `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`
-
-    console.log('uri >>> ', uri)
 
     mongoose.connect(uri, options)
   }

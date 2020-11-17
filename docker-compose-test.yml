@@ -8,7 +8,7 @@ services:
     ports:
       - '3333:3333'
     environment:
-      - MONGO_URI=mongodb://test:27017/dentistForm
+      - DB_HOST=db
       - NODE_ENV=test
     volumes:
       - '.:/usr/app'

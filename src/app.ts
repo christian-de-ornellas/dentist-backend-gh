@@ -10,7 +10,7 @@ class App {
   public express: express.Application
 
   public constructor() {
-    dotenv.config()
+    dotenv.config({ path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env' })
     this.express = express()
     this.middlewares()
     this.database()
@@ -29,7 +29,7 @@ class App {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     }
-    const uri = 'mongodb://test:27017/dentistForm'
+    const uri = `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`
     mongoose.connect(uri, options)
   }
 

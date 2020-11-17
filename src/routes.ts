@@ -23,6 +23,7 @@ routes.post(
   UsersController.store
 )
 routes.delete('/users/:id', UsersController.delete)
+routes.post('/login', UsersController.login)
 
 routes.post(
   '/clients',

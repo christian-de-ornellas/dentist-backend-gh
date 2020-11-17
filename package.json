@@ -9,8 +9,7 @@
     "start": "node dist/server.ts",
     "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/server.ts --ignore __test__",
     "lint": "eslint --fix --ext .js,.ts,.json .",
-    "test": "jest --forceExit --detectOpenHandles  --watchAll --maxWorkers=1",
-    "posttest": "NODE_ENV=test"
+    "test": "jest --forceExit --detectOpenHandles  --watchAll --maxWorkers=1"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.1",

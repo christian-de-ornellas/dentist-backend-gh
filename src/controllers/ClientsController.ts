@@ -4,7 +4,8 @@ import { Request, Response } from 'express'
 class ClientsController {
   public async index(req: Request, res: Response): Promise<Response> {
     try {
-      const clients = await Client.find()
+      const { search } = req.query
+      const clients = await Client.find({ firstName: search })
       return res.send(clients)
     } catch (e) {
       return res.status(500).send({ error: e.message })

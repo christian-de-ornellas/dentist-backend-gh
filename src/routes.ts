@@ -44,5 +44,6 @@ routes.post(
 )
 
 routes.get('/clients', ClientsController.index)
+routes.get('/clients/search', ClientsController.search)
 
 export default routes

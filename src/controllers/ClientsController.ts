@@ -4,7 +4,10 @@ import { Request, Response } from 'express'
 class ClientsController {
   public async index(req: Request, res: Response): Promise<Response> {
     try {
-      const clients = await Client.find()
+      const offset = parseInt(req.query.offset)
+      const limit = parseInt(req.query.limit)
+
+      const clients = await Client.find().skip(offset).limit(limit).sort({ firstName: 1 })
       return res.send(clients)
     } catch (e) {
       return res.status(400).send({ error: e.message })
@@ -14,7 +17,6 @@ class ClientsController {
   public async search(req: Request, res: Response): Promise<Response> {
     try {
       const { id } = req.query
-      console.log(req.query)
       const clients = await Client.find({ _id: id })
       return res.send(clients)
     } catch (e) {

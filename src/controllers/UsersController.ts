@@ -9,7 +9,7 @@ class UsersController {
       const users = await User.find().select('-password')
       return res.send(users)
     } catch (e) {
-      return res.status(500).send({ error: e.message })
+      return res.status(400).send({ error: e.message })
     }
   }
 
@@ -30,7 +30,7 @@ class UsersController {
 
       res.status(201).send({ user, token: jwt.sign({ user: user._id }, process.env.SECRET, { expiresIn: 86400 }) })
     } catch (e) {
-      return res.status(500).send({ error: e.message })
+      return res.status(400).send({ error: e.message })
     }
   }
 
@@ -51,7 +51,7 @@ class UsersController {
 
       return res.status(200).send({ user, token: jwt.sign({ user: user._id }, process.env.SECRET, { expiresIn: 86400 }) })
     } catch (e) {
-      return res.status(500).send({ error: e.message })
+      return res.status(400).send({ error: e.message })
     }
   }
 

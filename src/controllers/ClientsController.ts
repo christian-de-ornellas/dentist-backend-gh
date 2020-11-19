@@ -7,7 +7,7 @@ class ClientsController {
       const clients = await Client.find()
       return res.send(clients)
     } catch (e) {
-      return res.status(500).send({ error: e.message })
+      return res.status(400).send({ error: e.message })
     }
   }
 
@@ -18,7 +18,7 @@ class ClientsController {
       const clients = await Client.find({ firstName: v })
       return res.send(clients)
     } catch (e) {
-      return res.status(500).send({ error: e.message })
+      return res.status(400).send({ error: e.message })
     }
   }
 
@@ -33,7 +33,7 @@ class ClientsController {
       const client = await Client.create(req.body)
       return res.status(201).send({ client })
     } catch (e) {
-      return res.status(500).send({ error: e.message })
+      return res.status(400).send({ error: e.message })
     }
   }
 
@@ -43,7 +43,17 @@ class ClientsController {
       await Client.findByIdAndUpdate(id, { ...req.body })
       return res.status(200).send({ message: 'Updated!' })
     } catch (e) {
-      return res.status(500).send({ error: e.message })
+      return res.status(400).send({ error: e.message })
+    }
+  }
+
+  public async delete(req: Request, res: Response): Promise<Response> {
+    try {
+      await Client.findOneAndDelete(req.params.id)
+      return res.status(200).send({ message: 'Item removed!' })
+    } catch (error) {
+      console.log(error)
+      return res.status(400).send({ error: 'It was not possible to remove the user!' })
     }
   }
 }

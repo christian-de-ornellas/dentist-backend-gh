@@ -45,5 +45,6 @@ routes.post(
 routes.get('/clients', ClientsController.index)
 routes.get('/clients/search', ClientsController.search)
 routes.put('/clients/:id', ClientsController.update)
+routes.delete('/clients/:id', ClientsController.delete)
 
 export default routes

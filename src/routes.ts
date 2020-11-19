@@ -7,7 +7,6 @@ import { Router } from 'express'
 const routes = Router()
 
 routes.get('/', MainController.index)
-
 routes.get('/users', UsersController.index)
 routes.post(
   '/users',
@@ -45,5 +44,6 @@ routes.post(
 
 routes.get('/clients', ClientsController.index)
 routes.get('/clients/search', ClientsController.search)
+routes.put('/clients/:id', ClientsController.update)
 
 export default routes

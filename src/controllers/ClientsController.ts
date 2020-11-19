@@ -6,9 +6,16 @@ class ClientsController {
     try {
       const offset = parseInt(req.query.offset)
       const limit = parseInt(req.query.limit)
+      let clients = await Client.find().skip(offset).limit(limit).sort({ firstName: 1 })
+      await Client.count({}, function (err, count) {
+        return clients.push({ page: offset, limit, total: count })
+      })
 
-      const clients = await Client.find().skip(offset).limit(limit).sort({ firstName: 1 })
-      return res.send(clients)
+      if (clients.length > 0) {
+        return res.send(clients)
+      } else {
+        return res.send({ message: 'No results!' })
+      }
     } catch (e) {
       return res.status(400).send({ error: e.message })
     }

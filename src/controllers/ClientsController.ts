@@ -13,9 +13,9 @@ class ClientsController {
 
   public async search(req: Request, res: Response): Promise<Response> {
     try {
-      const { v } = req.query
+      const { id } = req.query
       console.log(req.query)
-      const clients = await Client.find({ firstName: v })
+      const clients = await Client.find({ _id: id })
       return res.send(clients)
     } catch (e) {
       return res.status(400).send({ error: e.message })

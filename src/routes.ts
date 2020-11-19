@@ -7,6 +7,8 @@ import { Router } from 'express'
 const routes = Router()
 
 routes.get('/', MainController.index)
+
+// Routes Users
 routes.get('/users', UsersController.index)
 routes.post(
   '/users',
@@ -22,8 +24,10 @@ routes.post(
   UsersController.store
 )
 routes.delete('/users/:id', UsersController.delete)
+routes.put('/users/:id', UsersController.update)
 routes.post('/login', UsersController.login)
 
+// Routes Clients
 routes.post(
   '/clients',
   celebrate({

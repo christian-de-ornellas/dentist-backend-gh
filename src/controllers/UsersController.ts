@@ -55,9 +55,18 @@ class UsersController {
     }
   }
 
+  public async update(req: Request, res: Response): Promise<Response> {
+    try {
+      await User.updateOne({ _id: req.params.id }, { ...req.body })
+      return res.status(200).send({ message: 'Is user updated!' })
+    } catch (e) {
+      return res.status(400).send({ error: e.message })
+    }
+  }
+
   public async delete(req: Request, res: Response): Promise<Response> {
     try {
-      await User.findOneAndDelete(req.params.id)
+      await User.deleteOne({ _id: req.params.id })
       return res.status(200).send({ message: 'Is user removed!' })
     } catch (error) {
       console.log(error)

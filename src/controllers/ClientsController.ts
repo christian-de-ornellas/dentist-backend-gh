@@ -40,8 +40,8 @@ class ClientsController {
   public async update(req: Request, res: Response): Promise<Response> {
     try {
       const { id } = req.params
-      await Client.findByIdAndUpdate(id, { ...req.body })
-      return res.status(200).send({ message: 'Updated!' })
+      await Client.updateOne({ _id: id }, { ...req.body })
+      return res.status(200).send({ message: 'Is client updated!' })
     } catch (e) {
       return res.status(400).send({ error: e.message })
     }
@@ -49,8 +49,8 @@ class ClientsController {
 
   public async delete(req: Request, res: Response): Promise<Response> {
     try {
-      await Client.findOneAndDelete(req.params.id)
-      return res.status(200).send({ message: 'Item removed!' })
+      await Client.deleteOne({ _id: req.params.id })
+      return res.status(200).send({ message: 'Is client removed!' })
     } catch (error) {
       console.log(error)
       return res.status(400).send({ error: 'It was not possible to remove the user!' })

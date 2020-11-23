@@ -20,7 +20,8 @@
       "@models/*": ["./src/models/*"],
       "@views/*": ["./src/views/*"],
       "@database/*": ["./src/database/*"],
-      "@interfaces/*": ["./src/interfaces/*"]
+      "@interfaces/*": ["./src/interfaces/*"],
+      "@middlewares/*": ["./src/middlewares/*"]
     }
   },
   "include": ["src/**/*"]

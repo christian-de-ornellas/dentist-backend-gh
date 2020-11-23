@@ -34,27 +34,6 @@ class UsersController {
     }
   }
 
-  public async login(req: Request, res: Response) {
-    try {
-      const { email, password } = req.body
-      const user = await User.findOne({ email })
-
-      if (!user) {
-        return res.status(400).send({ error: 'User not found' })
-      }
-
-      if (!(await bcrypt.compare(password, user.password))) {
-        return res.status(400).send({ error: 'Invalid password' })
-      }
-
-      user.password = undefined
-
-      return res.status(200).send({ user, token: jwt.sign({ user: user._id }, process.env.SECRET, { expiresIn: 86400 }) })
-    } catch (e) {
-      return res.status(400).send({ error: e.message })
-    }
-  }
-
   public async update(req: Request, res: Response): Promise<Response> {
     try {
       await User.updateOne({ _id: req.params.id }, { ...req.body })

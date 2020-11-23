@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 import * as jwt from 'jsonwebtoken'
 
-export function checkJwt(req: Request, res: Response, next: NextFunction) {
+export default function checkAuthJwt(req: Request, res: Response, next: NextFunction) {
   const authHeader = req.headers.authorization
 
   if (!authHeader) {
@@ -13,7 +13,7 @@ export function checkJwt(req: Request, res: Response, next: NextFunction) {
   if (!parts.length === 2) {
     return res.status(401).send({ error: 'Token error' })
   }
-
+  console.log(parts)
   const [scheme, token] = parts
 
   if (!/^Bearer$/i.test(scheme)) {
@@ -24,6 +24,7 @@ export function checkJwt(req: Request, res: Response, next: NextFunction) {
     if (err) {
       return res.status(401).send({ error: 'Token invalid' })
     }
+
     req.userId = decoded.id
     return next()
   })

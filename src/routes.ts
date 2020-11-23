@@ -3,11 +3,16 @@ import UsersController from '@controllers/UsersController'
 import ClientsController from '@controllers/ClientsController'
 import { celebrate, Joi, Segments } from 'celebrate'
 import { Router } from 'express'
+import checkAuthJwt from '@middlewares/checkAuthJwt'
+import AuthController from '@controllers/AuthController'
 
 const routes = Router()
 
 routes.get('/', MainController.index)
+routes.post('/login', AuthController.store)
 
+// All routes be private and need authentication
+routes.use(checkAuthJwt)
 // Routes Users
 routes.get('/users', UsersController.index)
 routes.post(
@@ -25,7 +30,6 @@ routes.post(
 )
 routes.delete('/users/:id', UsersController.delete)
 routes.put('/users/:id', UsersController.update)
-routes.post('/login', UsersController.login)
 
 // Routes Clients
 routes.post(

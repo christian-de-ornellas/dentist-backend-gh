@@ -10,11 +10,6 @@ const routes = Router()
 
 routes.get('/', MainController.index)
 routes.post('/login', AuthController.store)
-
-// All routes be private and need authentication
-routes.use(checkAuthJwt)
-// Routes Users
-routes.get('/users', UsersController.index)
 routes.post(
   '/users',
   celebrate({
@@ -28,6 +23,12 @@ routes.post(
   }),
   UsersController.store
 )
+
+// All routes be private and need authentication
+routes.use(checkAuthJwt)
+// Routes Users
+routes.get('/users', UsersController.index)
+
 routes.delete('/users/:id', UsersController.delete)
 routes.put('/users/:id', UsersController.update)
 

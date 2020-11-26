@@ -8,6 +8,9 @@ class ClientsController {
       const limit = parseInt(req.query.limit)
       let clients = await Client.find().skip(offset).limit(limit).sort({ firstName: 1 })
 
+      const documentCount = await Client.count({})
+      clients.push({ total: documentCount })
+
       if (clients.length > 0) {
         return res.send(clients)
       } else {

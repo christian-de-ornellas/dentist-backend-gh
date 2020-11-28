@@ -1,10 +1,11 @@
 import { Question } from '@models/Question'
+import { Form } from '@models/Form'
 import { Request, Response } from 'express'
 
 class QuestionsController {
   public async index(req: Request, res: Response): Promise<Response> {
     try {
-      const questions = await Question.find()
+      const questions = await Question.find().populate('form')
       return res.send(questions)
     } catch (error) {
       return res.status(400).send({ error })

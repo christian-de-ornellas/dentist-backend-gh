@@ -1,4 +1,4 @@
-import { IQuestion } from '@interfaces/IQueistion'
+import { IQuestion } from '@interfaces/IQuestion'
 import { Document, Model, model, Schema } from 'mongoose'
 export interface QuestionModel extends IQuestion, Document {}
 const QuestionSchema = new Schema(

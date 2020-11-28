@@ -7,8 +7,24 @@ import QuestionsController from '@controllers/QuestionsControlller'
 import { celebrate, Joi, Segments } from 'celebrate'
 import { Router } from 'express'
 import checkAuthJwt from '@middlewares/checkAuthJwt'
+import ReplysController from '@controllers/ReplysController'
 
 const routes = Router()
+
+// Reply
+routes.get('/replys', ReplysController.index)
+routes.post(
+  '/reply',
+  celebrate({
+    [Segments.BODY]: Joi.object().keys({
+      user: Joi.string().required(),
+      question: Joi.string().required(),
+      client: Joi.string().required(),
+      answer: Joi.string().required(),
+    }),
+  }),
+  ReplysController.store
+)
 
 routes.get('/', MainController.index)
 routes.post('/login', AuthController.store)
@@ -77,6 +93,7 @@ routes.delete('/forms/:id', FormsController.delete)
 
 // QuestionsController
 routes.get('/questions', QuestionsController.index)
+routes.get('/questions/all', QuestionsController.all)
 routes.post(
   '/questions',
   celebrate({

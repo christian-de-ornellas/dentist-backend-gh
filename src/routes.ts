@@ -1,10 +1,11 @@
 import MainController from '@controllers/MainController'
 import UsersController from '@controllers/UsersController'
 import ClientsController from '@controllers/ClientsController'
+import FormsController from '@controllers/FormsController'
+import AuthController from '@controllers/AuthController'
 import { celebrate, Joi, Segments } from 'celebrate'
 import { Router } from 'express'
 import checkAuthJwt from '@middlewares/checkAuthJwt'
-import AuthController from '@controllers/AuthController'
 
 const routes = Router()
 
@@ -26,13 +27,14 @@ routes.post(
 
 // All routes be private and need authentication
 routes.use(checkAuthJwt)
-// Routes Users
+
+// UsersController
 routes.get('/users', UsersController.index)
 
 routes.delete('/users/:id', UsersController.delete)
 routes.put('/users/:id', UsersController.update)
 
-// Routes Clients
+// ClientsController
 routes.post(
   '/clients',
   celebrate({
@@ -55,5 +57,21 @@ routes.get('/clients', ClientsController.index)
 routes.get('/clients/search', ClientsController.search)
 routes.put('/clients/:id', ClientsController.update)
 routes.delete('/clients/:id', ClientsController.delete)
+
+// FormsController
+routes.get('/forms', FormsController.index)
+routes.post(
+  '/forms',
+  celebrate({
+    [Segments.BODY]: Joi.object().keys({
+      user: Joi.string().required(),
+      title: Joi.string().required(),
+      description: Joi.string().required(),
+    }),
+  }),
+  FormsController.store
+)
+routes.put('/forms/:id', FormsController.update)
+routes.delete('/forms/:id', FormsController.delete)
 
 export default routes

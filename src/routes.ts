@@ -3,6 +3,7 @@ import UsersController from '@controllers/UsersController'
 import ClientsController from '@controllers/ClientsController'
 import FormsController from '@controllers/FormsController'
 import AuthController from '@controllers/AuthController'
+import QuestionsController from '@controllers/QuestionsControlller'
 import { celebrate, Joi, Segments } from 'celebrate'
 import { Router } from 'express'
 import checkAuthJwt from '@middlewares/checkAuthJwt'
@@ -73,5 +74,22 @@ routes.post(
 )
 routes.put('/forms/:id', FormsController.update)
 routes.delete('/forms/:id', FormsController.delete)
+
+// QuestionsController
+routes.get('/questions', QuestionsController.index)
+routes.post(
+  '/questions',
+  celebrate({
+    [Segments.BODY]: Joi.object().keys({
+      form: Joi.string().required(),
+      user: Joi.string().required(),
+      question: Joi.string().required(),
+      input: Joi.string().required(),
+    }),
+  }),
+  QuestionsController.store
+)
+routes.put('/questions/:id', QuestionsController.update)
+routes.delete('/questions/:id', QuestionsController.delete)
 
 export default routes

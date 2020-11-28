@@ -5,7 +5,7 @@ docker ps
 docker ps -a 
 
 # Ambiente de desenvolvimento
-docker-compose up -d 
+docker-compose up -d
 
 # Desfazer ambiente de desenvolvimento
 docker-compose down

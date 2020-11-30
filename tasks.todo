@@ -1,8 +1,12 @@
 Usuários: 
-✔ Crud de usuários @done (11/30/2020, 8:22:58 AM)
-✔ Crud de clientes @done (11/30/2020, 8:22:54 AM)
-✔ Criar formularios @done (11/30/2020, 8:25:05 AM)
-✔ Criar questões para os formulários @done (11/30/2020, 8:25:10 AM)
-☐ O cliente deve receber um formulário e autenticar por documento para responder.
-☐ O usuário deve ver as respostas do cliente.
-
+  ✔ Crud de usuários @done (11/30/2020, 8:22:58 AM)
+Clientes:
+  ✔ Crud de clientes @done (11/30/2020, 8:22:54 AM)
+Questões:
+  ✔ Criar questões para os formulários @done (11/30/2020, 8:25:10 AM)    
+Formulários:  
+  ✔ Criar formularios @done (11/30/2020, 8:25:05 AM)  
+Respostas: 
+  ☐ O cliente deve receber um formulário e autenticar por documento para responder.
+  ☐ Atualizar Resposas
+  ✔ O usuário deve ver as respostas do cliente inserindo o id do formulário e o id do cliente. @done (11/30/2020, 12:10:58 PM)

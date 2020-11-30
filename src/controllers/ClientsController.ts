@@ -6,7 +6,7 @@ class ClientsController {
     try {
       const offset = parseInt(req.query.offset)
       const limit = parseInt(req.query.limit)
-      let clients = await Client.find()
+      const clients = await Client.find()
         .skip(offset * limit)
         .limit(limit)
         .sort({ firstName: 1 })

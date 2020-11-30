@@ -1,18 +1,19 @@
-import MainController from '@controllers/MainController'
-import UsersController from '@controllers/UsersController'
+import AuthController from '@controllers/AuthController'
 import ClientsController from '@controllers/ClientsController'
 import FormsController from '@controllers/FormsController'
-import AuthController from '@controllers/AuthController'
+import MainController from '@controllers/MainController'
 import QuestionsController from '@controllers/QuestionsControlller'
+import ReplysController from '@controllers/ReplysController'
+import UsersController from '@controllers/UsersController'
+import checkAuthJwt from '@middlewares/checkAuthJwt'
 import { celebrate, Joi, Segments } from 'celebrate'
 import { Router } from 'express'
-import checkAuthJwt from '@middlewares/checkAuthJwt'
-import ReplysController from '@controllers/ReplysController'
 
 const routes = Router()
 
 // Reply
 routes.get('/replys', ReplysController.index)
+routes.put('/reply/:id', ReplysController.update)
 routes.post(
   '/reply',
   celebrate({
@@ -27,6 +28,7 @@ routes.post(
   }),
   ReplysController.store
 )
+routes.put('reply/:id', ReplysController.update)
 
 routes.get('/', MainController.index)
 routes.post('/login', AuthController.store)

@@ -8,5 +8,5 @@ Formulários:
   ✔ Criar formularios @done (11/30/2020, 8:25:05 AM)  
 Respostas: 
   ☐ O cliente deve receber um formulário e autenticar por documento para responder.
-  ☐ Atualizar Resposas
+  ✔ Atualizar Resposas @done (11/30/2020, 12:36:36 PM)
   ✔ O usuário deve ver as respostas do cliente inserindo o id do formulário e o id do cliente. @done (11/30/2020, 12:10:58 PM)

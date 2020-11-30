@@ -14,12 +14,22 @@ class ReplysController {
       return res.status(400).send({ error })
     }
   }
+
   public async store(req: Request, res: Response): Promise<Response> {
     try {
       await Reply.create(req.body)
       return res.status(201).send({ message: 'Reply created!' })
     } catch (error) {
       return res.status(400).send({ error })
+    }
+  }
+  public async update(req: Request, res: Response): Promise<Response> {
+    try {
+      const { id } = req.params
+      await Reply.updateOne({ _id: id }, { ...req.body })
+      return res.status(200).send({ message: 'Is reply updated!' })
+    } catch (e) {
+      return res.status(400).send({ error: e.message })
     }
   }
 }

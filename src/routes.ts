@@ -18,9 +18,11 @@ routes.post(
   celebrate({
     [Segments.BODY]: Joi.object().keys({
       user: Joi.string().required(),
+      form: Joi.string().required(),
       question: Joi.string().required(),
       client: Joi.string().required(),
       answer: Joi.string().required(),
+      other: Joi.string(),
     }),
   }),
   ReplysController.store

@@ -8,6 +8,11 @@ const ReplySchema = new Schema(
       ref: 'User',
       require: true,
     },
+    form: {
+      type: Schema.Types.ObjectId,
+      ref: 'Form',
+      require: true,
+    },
     question: {
       type: Schema.Types.ObjectId,
       ref: 'Question',

@@ -11,12 +11,7 @@ class ClientsController {
         .limit(limit)
         .sort({ firstName: 1 })
       const total = await Client.count()
-
-      if (clients.length > 0) {
-        return res.send({ clients, total, offset, limit })
-      } else {
-        return res.send({ message: 'No results!' })
-      }
+      return res.send({ clients, total, offset, limit })
     } catch (e) {
       return res.status(400).send({ error: e.message })
     }

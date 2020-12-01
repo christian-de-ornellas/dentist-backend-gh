@@ -13,7 +13,7 @@ export default function checkAuthJwt(req: Request, res: Response, next: NextFunc
   if (!parts.length === 2) {
     return res.status(401).send({ error: 'Token error' })
   }
-  console.log(parts)
+
   const [scheme, token] = parts
 
   if (!/^Bearer$/i.test(scheme)) {

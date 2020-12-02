@@ -22,6 +22,6 @@ services:
   db:
     image: mongo:4.2
     container_name: mongoDB
-    #restart: always
+    restart: always
     ports:
       - '27017:27017'

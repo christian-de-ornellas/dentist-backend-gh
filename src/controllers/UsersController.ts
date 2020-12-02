@@ -59,6 +59,16 @@ class UsersController {
       return res.status(400).send({ error: 'It was not possible to remove the user!' })
     }
   }
+
+  public async search(req: Request, res: Response): Promise<Response> {
+    try {
+      const { id } = req.params
+      const users = await User.find({ _id: id })
+      return res.send(users)
+    } catch (error) {
+      return res.status(400).send({ error })
+    }
+  }
 }
 
 export default new UsersController()

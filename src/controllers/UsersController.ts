@@ -6,8 +6,15 @@ import * as jwt from 'jsonwebtoken'
 class UsersController {
   public async index(req: Request, res: Response): Promise<Response> {
     try {
-      const users = await User.find().select('-password')
-      return res.send(users)
+      const offset = parseInt(req.query.offset)
+      const limit = parseInt(req.query.limit)
+      const users = await User.find()
+        .select('-password')
+        .skip(offset * limit)
+        .limit(limit)
+        .sort({ firstName: 1 })
+      const total = await User.count()
+      return res.send({ users, total, offset, limit })
     } catch (e) {
       return res.status(400).send({ error: e.message })
     }

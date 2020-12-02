@@ -1,7 +1,7 @@
 import AuthController from '@controllers/AuthController'
 import ClientsController from '@controllers/ClientsController'
+import DashboardController from '@controllers/DashboardController'
 import FormsController from '@controllers/FormsController'
-import MainController from '@controllers/MainController'
 import QuestionsController from '@controllers/QuestionsControlller'
 import ReplysController from '@controllers/ReplysController'
 import UsersController from '@controllers/UsersController'
@@ -30,7 +30,7 @@ routes.post(
 )
 routes.put('reply/:id', ReplysController.update)
 
-routes.get('/', MainController.index)
+routes.get('/dashboard', DashboardController.index)
 routes.post('/login', AuthController.store)
 routes.post(
   '/users',

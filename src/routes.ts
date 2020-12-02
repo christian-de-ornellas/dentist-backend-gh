@@ -51,7 +51,7 @@ routes.use(checkAuthJwt)
 
 // UsersController
 routes.get('/users', UsersController.index)
-
+routes.get('/users/:id', UsersController.search)
 routes.delete('/users/:id', UsersController.delete)
 routes.put('/users/:id', UsersController.update)
 

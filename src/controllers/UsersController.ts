@@ -43,8 +43,24 @@ class UsersController {
 
   public async update(req: Request, res: Response): Promise<Response> {
     try {
+      const { email, role, password } = req.body
+
+      if (role && role != 'admin' && role && role != 'mod') {
+        return res.status(400).send({ error: 'User role cannot be different from admin or mod!' })
+      }
+
+      if (email && (await User.findOne({ email }))) {
+        return res.status(400).send({ error: 'User already exists!' })
+      }
+
+      if (password) {
+        const hash = await bcrypt.hash(req.body.password, 10)
+        req.body.password = hash
+      }
+
       await User.updateOne({ _id: req.params.id }, { ...req.body })
-      return res.status(200).send({ message: 'Is user updated!' })
+
+      res.status(200).send({ message: 'Is user updated!' })
     } catch (e) {
       return res.status(400).send({ error: e.message })
     }

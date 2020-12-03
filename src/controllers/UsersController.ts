@@ -61,8 +61,8 @@ class UsersController {
       await User.updateOne({ _id: req.params.id }, { ...req.body })
 
       res.status(200).send({ message: 'Is user updated!' })
-    } catch (e) {
-      return res.status(400).send({ error: e.message })
+    } catch (error) {
+      return res.status(500).send({ error })
     }
   }
 

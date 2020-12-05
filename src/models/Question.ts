@@ -22,6 +22,7 @@ const QuestionSchema = new Schema(
 
     input: String,
     valueKey: String,
+    subQuestion: String,
     option: String,
   },
 

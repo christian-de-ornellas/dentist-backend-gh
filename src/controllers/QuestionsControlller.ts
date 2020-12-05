@@ -1,11 +1,11 @@
-import { Question } from '@models/Question'
 import { Form } from '@models/Form'
+import { Question } from '@models/Question'
 import { Request, Response } from 'express'
 
 class QuestionsController {
   public async index(req: Request, res: Response): Promise<Response> {
     try {
-      const questions = await Question.find({ form: req.query.form_id }).populate('form')
+      const questions = await Question.find({ form: req.query.form_id })
       return res.send(questions)
     } catch (error) {
       return res.status(400).send({ error })
@@ -21,15 +21,15 @@ class QuestionsController {
   }
   public async store(req: Request, res: Response): Promise<Response> {
     try {
-      const { question } = req.body
+      const { form, user, question, input, valueKey, option } = req.body
 
       if (await Question.findOne({ question })) {
         return res.status(400).send({ error: 'Question already exists!' })
       }
-
-      const newQuestion = await Question.create(req.body)
-      return res.status(201).send({ message: 'Question created!' })
+      const a = await Question.create({ form, user, question, input, valueKey, option })
+      return res.status(201).send({ message: a })
     } catch (error) {
+      console.log(error)
       return res.status(400).send({ error })
     }
   }

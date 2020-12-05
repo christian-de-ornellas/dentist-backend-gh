@@ -106,6 +106,7 @@ routes.post(
       user: Joi.string().required(),
       question: Joi.string().required(),
       input: Joi.string().required(),
+      valueKey: Joi.string(),
       option: Joi.string(),
     }),
   }),

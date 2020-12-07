@@ -23,10 +23,7 @@ class QuestionsController {
     try {
       const { form, user, question, input, valueKey, subQuestion, option } = req.body
 
-      if (await Question.findOne({ question })) {
-        return res.status(400).send({ error: 'Question already exists!' })
-      }
-      await Question.create({ form, user, question, input, valueKey, subQuestion, option })
+      await Question.create({ ...req.body })
       return res.status(201).send({ message: 'Question created!' })
     } catch (error) {
       console.log(error)

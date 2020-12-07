@@ -104,11 +104,25 @@ routes.post(
     [Segments.BODY]: Joi.object().keys({
       form: Joi.string().required(),
       user: Joi.string().required(),
-      question: Joi.string().required(),
-      input: Joi.string().required(),
-      valueKey: Joi.string(),
-      subQuestion: Joi.string(),
-      option: Joi.string(),
+      question: Joi.object({
+        ask: Joi.string().required(),
+        input: Joi.array().items(
+          Joi.object({
+            type: Joi.string(),
+            value: Joi.optional(),
+          })
+        ),
+      }),
+      subQuestion: Joi.object().keys({
+        ask: Joi.optional(),
+        valueKey: Joi.optional(),
+        input: Joi.array().items(
+          Joi.object({
+            type: Joi.optional(),
+            value: Joi.optional(),
+          })
+        ),
+      }),
     }),
   }),
   QuestionsController.store

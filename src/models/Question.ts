@@ -16,14 +16,24 @@ const QuestionSchema = new Schema(
     },
 
     question: {
-      type: String,
-      required: true,
+      ask: { type: String, require: true },
+      input: [
+        {
+          type: { type: String, require: true },
+          value: { type: String },
+        },
+      ],
     },
-
-    input: String,
-    valueKey: String,
-    subQuestion: String,
-    option: String,
+    subQuestion: {
+      ask: { type: String },
+      valueKey: { type: String },
+      input: [
+        {
+          type: { type: String },
+          value: { type: String },
+        },
+      ],
+    },
   },
 
   {

@@ -132,4 +132,6 @@ routes.post(
 routes.put('/questions/:id', QuestionsController.update)
 routes.delete('/questions/:id', QuestionsController.delete)
 
+routes.get('/answers', ReplysController.answers)
+
 export default routes

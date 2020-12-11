@@ -18,6 +18,26 @@ class ReplysController {
     }
   }
 
+  public async answers(req: Request, res: Response): Promise<Response> {
+    try {
+      const { form } = req.query
+      const offset = parseInt(req.query.offset)
+      const limit = parseInt(req.query.limit)
+
+      const replys = await Reply.find({ form })
+        .populate('client')
+        .skip(offset * limit)
+        .limit(limit)
+      const total = await Reply.count()
+
+      const response = replys.length === 0 ? { message: 'No answer!' } : replys
+
+      return res.send({ response, offset, limit, total })
+    } catch (error) {
+      return res.status(400).send({ error: error.message })
+    }
+  }
+
   public async store(req: Request, res: Response): Promise<Response> {
     try {
       await Reply.create(req.body)

@@ -22,8 +22,10 @@ routes.post(
       form: Joi.string().required(),
       question: Joi.string().required(),
       client: Joi.string().required(),
-      answer: Joi.string().required(),
-      other: Joi.string(),
+      answer: Joi.object({
+        subAnswer: Joi.boolean(),
+        value: Joi.optional(),
+      }),
     }),
   }),
   ReplysController.store

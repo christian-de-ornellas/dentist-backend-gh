@@ -9,7 +9,10 @@ class ReplysController {
         .populate('question')
         .populate('client')
         .populate('form')
-      return res.send(replys)
+
+      const response = replys.length === 0 ? { message: 'No answer!' } : replys
+
+      return res.send(response)
     } catch (error) {
       return res.status(400).send({ error })
     }

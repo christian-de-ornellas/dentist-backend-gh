@@ -23,8 +23,7 @@ const ReplySchema = new Schema(
       ref: 'Client',
       require: true,
     },
-    answer: String,
-    other: String,
+    answer: { subAnswer: Boolean, value: String },
   },
 
   {

@@ -40,10 +40,18 @@ class ReplysController {
 
   public async store(req: Request, res: Response): Promise<Response> {
     try {
-      await Reply.create(req.body)
-      return res.status(201).send({ message: 'Reply created!' })
+      const { client, question } = req.body
+      const searchClientAnswers = await Reply.find({ $and: [{ question }, { client }] })
+      console.log(searchClientAnswers.length)
+
+      if (searchClientAnswers.length > 0) {
+        return res.status(403).send({ message: 'Answered form!' })
+      } else {
+        await Reply.create(req.body)
+        return res.status(201).send({ message: 'Reply created!' })
+      }
     } catch (error) {
-      return res.status(400).send({ error })
+      return res.status(400).send({ error: error.message })
     }
   }
   public async update(req: Request, res: Response): Promise<Response> {

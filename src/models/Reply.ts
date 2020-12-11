@@ -3,11 +3,6 @@ import { Document, Model, model, Schema } from 'mongoose'
 export interface ReplyModel extends IReply, Document {}
 const ReplySchema = new Schema(
   {
-    user: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-      require: true,
-    },
     form: {
       type: Schema.Types.ObjectId,
       ref: 'Form',
@@ -23,7 +18,7 @@ const ReplySchema = new Schema(
       ref: 'Client',
       require: true,
     },
-    answer: { subAnswer: Boolean, value: String },
+    answer: { value: String },
   },
 
   {

@@ -18,12 +18,10 @@ routes.post(
   '/reply',
   celebrate({
     [Segments.BODY]: Joi.object().keys({
-      user: Joi.string().required(),
       form: Joi.string().required(),
       question: Joi.string().required(),
       client: Joi.string().required(),
       answer: Joi.object({
-        subAnswer: Joi.boolean(),
         value: Joi.optional(),
       }),
     }),

@@ -21,8 +21,6 @@ class QuestionsController {
   }
   public async store(req: Request, res: Response): Promise<Response> {
     try {
-      const { form, user, question, input, valueKey, subQuestion, option } = req.body
-
       await Question.create({ ...req.body })
       return res.status(201).send({ message: 'Question created!' })
     } catch (error) {

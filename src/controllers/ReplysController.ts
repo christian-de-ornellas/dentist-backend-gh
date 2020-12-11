@@ -40,8 +40,8 @@ class ReplysController {
 
   public async store(req: Request, res: Response): Promise<Response> {
     try {
-      const { client, form } = req.body
-      const searchClientAnswers = await Reply.find({ $and: [{ form }, { client }] })
+      const { client, question, form } = req.body
+      const searchClientAnswers = await Reply.find({ $and: [{ question }, { client }, { form }] })
 
       // Uma questão pode ter até no máximo 1 resposta e 1 sub resposta.
       if (searchClientAnswers.length > 2) {

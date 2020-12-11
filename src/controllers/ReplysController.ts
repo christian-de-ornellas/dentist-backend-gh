@@ -40,11 +40,11 @@ class ReplysController {
 
   public async store(req: Request, res: Response): Promise<Response> {
     try {
-      const { client, question } = req.body
-      const searchClientAnswers = await Reply.find({ $and: [{ question }, { client }] })
-      console.log(searchClientAnswers.length)
+      const { client, form } = req.body
+      const searchClientAnswers = await Reply.find({ $and: [{ form }, { client }] })
 
-      if (searchClientAnswers.length > 0) {
+      // Uma questão pode ter até no máximo 1 resposta e 1 sub resposta.
+      if (searchClientAnswers.length > 2) {
         return res.status(403).send({ message: 'Answered form!' })
       } else {
         await Reply.create(req.body)

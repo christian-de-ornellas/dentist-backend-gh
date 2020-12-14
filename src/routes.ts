@@ -22,6 +22,7 @@ routes.post(
       question: Joi.string().required(),
       client: Joi.string().required(),
       answer: Joi.object({
+        subAnswer: Joi.optional(),
         value: Joi.optional(),
       }),
     }),

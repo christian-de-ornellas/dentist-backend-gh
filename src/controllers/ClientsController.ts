@@ -29,10 +29,14 @@ class ClientsController {
 
   public async store(req: Request, res: Response): Promise<Response> {
     try {
-      const { document } = req.body
+      const { document, email } = req.body
 
       if (await Client.findOne({ document })) {
         return res.status(400).send({ error: 'Client already exists!' })
+      }
+
+      if (await Client.findOne({ email })) {
+        return res.status(400).send({ error: 'Email already exists!' })
       }
 
       const client = await Client.create(req.body)

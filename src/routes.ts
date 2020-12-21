@@ -70,6 +70,10 @@ routes.post(
       father: Joi.string(),
       mother: Joi.string(),
       place: Joi.array(),
+      bondsman: Joi.object().keys({
+        document: Joi.string(),
+        name: Joi.string(),
+      }),
     }),
   }),
   ClientsController.store

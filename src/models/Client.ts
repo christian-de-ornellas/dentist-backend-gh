@@ -62,6 +62,10 @@ const ClientSchema = new Schema(
         state: String,
       },
     ],
+    bondsman: {
+      document: String,
+      name: String,
+    },
   },
   {
     timestamps: true,

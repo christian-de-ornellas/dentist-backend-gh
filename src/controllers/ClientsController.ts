@@ -1,4 +1,5 @@
 import { Client } from '@models/Client'
+import { User } from '@models/User'
 import { Request, Response } from 'express'
 
 class ClientsController {
@@ -40,6 +41,15 @@ class ClientsController {
       }
 
       const client = await Client.create(req.body)
+
+      await User.create({
+        email: req.body.email,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        password: req.body.bondsman.document,
+        role: 'client',
+      })
+
       return res.status(201).send({ client })
     } catch (e) {
       return res.status(400).send({ error: e.message })

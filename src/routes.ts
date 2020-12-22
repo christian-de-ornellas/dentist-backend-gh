@@ -63,6 +63,7 @@ routes.post(
     [Segments.BODY]: Joi.object().keys({
       firstName: Joi.string().required(),
       lastName: Joi.string().required(),
+      genre: Joi.string().required(),
       document: Joi.number(),
       birth: Joi.string(),
       email: Joi.string().required().email(),

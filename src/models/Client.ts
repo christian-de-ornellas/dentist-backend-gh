@@ -21,6 +21,8 @@ const ClientSchema = new Schema(
       required: true,
     },
 
+    genre: String,
+
     document: {
       type: Number,
       required: true,

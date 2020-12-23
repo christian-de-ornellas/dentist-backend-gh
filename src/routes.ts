@@ -4,6 +4,7 @@ import DashboardController from '@controllers/DashboardController'
 import FormsController from '@controllers/FormsController'
 import QuestionsController from '@controllers/QuestionsControlller'
 import ReplysController from '@controllers/ReplysController'
+import TermsController from '@controllers/TermsController'
 import UsersController from '@controllers/UsersController'
 import checkAuthJwt from '@middlewares/checkAuthJwt'
 import { celebrate, Joi, Segments } from 'celebrate'
@@ -137,5 +138,19 @@ routes.put('/questions/:id', QuestionsController.update)
 routes.delete('/questions/:id', QuestionsController.delete)
 
 routes.get('/answers', ReplysController.answers)
+
+//TermsController
+routes.get('/terms', TermsController.index)
+routes.post(
+  '/terms',
+  celebrate({
+    [Segments.BODY]: Joi.object().keys({
+      client: Joi.string().required(),
+      form: Joi.string().required(),
+      term: Joi.string().required(),
+    }),
+  }),
+  TermsController.store
+)
 
 export default routes

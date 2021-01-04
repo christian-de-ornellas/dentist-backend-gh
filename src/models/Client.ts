@@ -65,6 +65,7 @@ const ClientSchema = new Schema(
       },
     ],
     bondsman: {
+      parent: String,
       document: String,
       name: String,
     },

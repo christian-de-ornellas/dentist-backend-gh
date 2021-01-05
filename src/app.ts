@@ -1,10 +1,11 @@
 import bodyParser from 'body-parser'
 import { errors } from 'celebrate'
 import cors from 'cors'
+import * as dotenv from 'dotenv'
 import express from 'express'
 import mongoose from 'mongoose'
+
 import routes from './routes'
-import * as dotenv from 'dotenv'
 
 class App {
   public express: express.Application
@@ -29,7 +30,7 @@ class App {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     }
-    const uri = `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`
+    const uri = `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`
     mongoose.connect(uri, options)
   }
 

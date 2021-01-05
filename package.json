@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
-    "start": "node src/server.ts",
+    "start": "tsnd --transpile-only --respawn src/server.ts",
     "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/server.ts --ignore __test__",
     "lint": "eslint --fix --ext .js,.ts,.json .",
     "test": "jest --forceExit --detectOpenHandles  --watchAll --maxWorkers=1"

@@ -27,7 +27,7 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
-
+    theme: String,
     role: String,
   },
   {

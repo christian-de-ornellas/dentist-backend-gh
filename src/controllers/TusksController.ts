@@ -4,8 +4,8 @@ import { Request, Response } from 'express'
 class TusksController {
   public async index(req: Request, res: Response): Promise<Response> {
     try {
-      const { clientId, tuskId } = req.query
-      const tusks = await Tusk.find({ client: clientId, _id: tuskId })
+      const { clientId } = req.query
+      const tusks = await Tusk.find({ client: clientId })
       return res.send(tusks)
     } catch (e) {
       return res.status(400).send({ error: e.message })

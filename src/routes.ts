@@ -6,6 +6,7 @@ import QuestionsController from '@controllers/QuestionsControlller'
 import ReplysController from '@controllers/ReplysController'
 import TermsController from '@controllers/TermsController'
 import UsersController from '@controllers/UsersController'
+import TusksController from '@controllers/TusksController'
 import checkAuthJwt from '@middlewares/checkAuthJwt'
 import { celebrate, Joi, Segments } from 'celebrate'
 import { Router } from 'express'
@@ -50,6 +51,12 @@ routes.post(
 
 // All routes be private and need authentication
 routes.use(checkAuthJwt)
+
+// TusksController
+
+routes.get('/tusks', TusksController.index)
+routes.delete('/tusks/:id', TusksController.delete)
+routes.post('/tusks', TusksController.store)
 
 // UsersController
 routes.get('/users', UsersController.index)

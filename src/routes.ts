@@ -5,8 +5,8 @@ import FormsController from '@controllers/FormsController'
 import QuestionsController from '@controllers/QuestionsControlller'
 import ReplysController from '@controllers/ReplysController'
 import TermsController from '@controllers/TermsController'
-import UsersController from '@controllers/UsersController'
 import TusksController from '@controllers/TusksController'
+import UsersController from '@controllers/UsersController'
 import checkAuthJwt from '@middlewares/checkAuthJwt'
 import { celebrate, Joi, Segments } from 'celebrate'
 import { Router } from 'express'
@@ -15,7 +15,7 @@ const routes = Router()
 
 // Reply
 routes.get('/replys', ReplysController.index)
-routes.put('/reply/:id', ReplysController.update)
+routes.delete('/reply/:id', ReplysController.delete)
 routes.post(
   '/reply',
   celebrate({
@@ -31,7 +31,6 @@ routes.post(
   }),
   ReplysController.store
 )
-routes.put('reply/:id', ReplysController.update)
 
 routes.get('/dashboard', DashboardController.index)
 routes.post('/login', AuthController.store)

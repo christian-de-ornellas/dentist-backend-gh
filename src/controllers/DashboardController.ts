@@ -9,8 +9,10 @@ class DashboardController {
       const usersCount = await User.count()
       const clientsCount = await Client.count()
       const formsAnwersCount = await Reply.count()
+      const forms = await Reply.distinct('client')
+      const formsCount = forms.length
 
-      return res.status(200).send({ usersCount, clientsCount, formsAnwersCount })
+      return res.status(200).send({ usersCount, clientsCount, formsAnwersCount, formsCount })
     } catch (error) {
       return res.status(400).send({ error })
     }

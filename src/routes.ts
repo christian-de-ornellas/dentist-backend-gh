@@ -160,4 +160,6 @@ routes.post(
   TermsController.store
 )
 
+routes.delete('/terms/:id', TermsController.delete)
+
 export default routes

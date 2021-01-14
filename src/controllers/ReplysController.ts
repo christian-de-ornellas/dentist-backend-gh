@@ -54,6 +54,7 @@ class ReplysController {
       return res.status(400).send({ error: error.message })
     }
   }
+
   public async delete(req: Request, res: Response): Promise<Response> {
     try {
       const { id } = req.params

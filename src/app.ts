@@ -1,10 +1,11 @@
 import bodyParser from 'body-parser'
 import { errors } from 'celebrate'
 import cors from 'cors'
+import * as dotenv from 'dotenv'
 import express from 'express'
 import mongoose from 'mongoose'
+
 import routes from './routes'
-import * as dotenv from 'dotenv'
 
 class App {
   public express: express.Application

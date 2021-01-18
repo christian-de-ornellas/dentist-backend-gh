@@ -1,10 +1,11 @@
 import bodyParser from 'body-parser'
 import { errors } from 'celebrate'
 import cors from 'cors'
+import * as dotenv from 'dotenv'
 import express from 'express'
 import mongoose from 'mongoose'
+
 import routes from './routes'
-import * as dotenv from 'dotenv'
 
 class App {
   public express: express.Application
@@ -17,6 +18,7 @@ class App {
     this.routes()
     this.parser()
     this.celebrate()
+    this.staticImages()
   }
 
   private middlewares(): void {
@@ -44,6 +46,10 @@ class App {
 
   private celebrate(): void {
     this.express.use(errors())
+  }
+
+  private staticImages(): void {
+    this.express.use('/uploads', express.static('tmp'))
   }
 }
 

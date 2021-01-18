@@ -2,6 +2,7 @@ import AuthController from '@controllers/AuthController'
 import ClientsController from '@controllers/ClientsController'
 import DashboardController from '@controllers/DashboardController'
 import FormsController from '@controllers/FormsController'
+import ImagesController from '@controllers/ImagesController'
 import QuestionsController from '@controllers/QuestionsControlller'
 import ReplysController from '@controllers/ReplysController'
 import TermsController from '@controllers/TermsController'
@@ -47,9 +48,6 @@ routes.post(
   }),
   UsersController.store
 )
-
-// All routes be private and need authentication
-routes.use(checkAuthJwt)
 
 // TusksController
 
@@ -161,5 +159,7 @@ routes.post(
 )
 
 routes.delete('/terms/:id', TermsController.delete)
+
+routes.post('/images', ImagesController.store)
 
 export default routes

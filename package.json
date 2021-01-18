@@ -24,6 +24,7 @@
     "@types/factory-girl": "^5.0.2",
     "@types/jest": "^26.0.15",
     "@types/jsonwebtoken": "^8.5.0",
+    "@types/formidable": "^1.0.32",
     "@types/supertest": "^2.0.10",
     "@typescript-eslint/eslint-plugin": "^4.6.0",
     "@typescript-eslint/parser": "^4.6.0",
@@ -46,7 +47,6 @@
     "typescript": "^3.9.5"
   },
   "dependencies": {
-    "@types/formidable": "^1.0.32",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "celebrate": "^13.0.3",

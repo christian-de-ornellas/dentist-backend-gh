@@ -69,6 +69,7 @@ const ClientSchema = new Schema(
       document: String,
       name: String,
     },
+    files: [],
   },
   {
     timestamps: true,

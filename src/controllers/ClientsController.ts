@@ -68,8 +68,14 @@ class ClientsController {
 
   public async delete(req: Request, res: Response): Promise<Response> {
     try {
-      await Client.deleteOne({ _id: req.params.id })
-      return res.status(200).send({ message: 'Is client removed!' })
+      const client = await Client.findOne({ _id: req.params.id })
+
+      if (client) {
+        const user = await User.findOne({ email: client.email })
+        await User.deleteOne({ _id: user._id })
+        await Client.deleteOne({ _id: req.params.id })
+        return res.status(200).send({ message: 'Is client removed!' })
+      }
     } catch (error) {
       console.log(error)
       return res.status(400).send({ error: 'It was not possible to remove the user!' })

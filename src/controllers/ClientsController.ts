@@ -11,7 +11,7 @@ class ClientsController {
         .skip(offset * limit)
         .limit(limit)
         .sort({ firstName: 1 })
-      const total = await Client.count()
+      const total = await Client.countDocuments()
       return res.send({ clients, total, offset, limit })
     } catch (e) {
       return res.status(400).send({ error: e.message })

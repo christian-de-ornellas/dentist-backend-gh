@@ -38,7 +38,7 @@ class ImagesController {
 
       if (files) {
         files.splice(files.indexOf(image), 1)
-        fs.unlinkSync(`/usr/app/tmp/${image}`)
+        fs.unlinkSync(`/usr/app/uploads/${image}`)
         await Client.updateOne({ _id: clientId }, { $set: { files } })
       }
 

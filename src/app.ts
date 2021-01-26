@@ -49,7 +49,7 @@ class App {
   }
 
   private staticImages(): void {
-    this.express.use('/uploads', express.static('tmp'))
+    this.express.use('/tmp', express.static('tmp'))
   }
 }
 

@@ -161,5 +161,6 @@ routes.post(
 routes.delete('/terms/:id', TermsController.delete)
 
 routes.post('/images', ImagesController.store)
+routes.delete('/remove', ImagesController.delete)
 
 export default routes

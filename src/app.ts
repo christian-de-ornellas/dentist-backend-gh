@@ -18,6 +18,7 @@ class App {
     this.routes()
     this.parser()
     this.celebrate()
+    this.staticImages()
   }
 
   private middlewares(): void {
@@ -45,6 +46,10 @@ class App {
 
   private celebrate(): void {
     this.express.use(errors())
+  }
+
+  private staticImages(): void {
+    this.express.use('/tmp', express.static('tmp'))
   }
 }
 

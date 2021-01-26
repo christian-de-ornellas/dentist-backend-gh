@@ -54,11 +54,12 @@ class ReplysController {
       return res.status(400).send({ error: error.message })
     }
   }
-  public async update(req: Request, res: Response): Promise<Response> {
+
+  public async delete(req: Request, res: Response): Promise<Response> {
     try {
       const { id } = req.params
-      await Reply.updateOne({ _id: id }, { ...req.body })
-      return res.status(200).send({ message: 'Is reply updated!' })
+      await Reply.deleteOne({ _id: id }, { ...req.body })
+      return res.status(200).send({ message: 'Is reply removed!' })
     } catch (e) {
       return res.status(400).send({ error: e.message })
     }

@@ -20,6 +20,16 @@ class TermsController {
       return res.status(400).send({ error })
     }
   }
+
+  public async delete(req: Request, res: Response): Promise<Response> {
+    try {
+      const { id } = req.params
+      await Term.deleteOne({ _id: id }, { ...req.body })
+      return res.status(200).send({ message: 'Is term removed!' })
+    } catch (e) {
+      return res.status(400).send({ error: e.message })
+    }
+  }
 }
 
 export default new TermsController()

@@ -34,14 +34,13 @@ class ImagesController {
       const { clientId, image } = req.query
 
       const client = await Client.findOne({ _id: clientId })
+      const files = await client.files
 
-      const files = client.files.map((file) => file)
-
-      const newFileList = files.splice(files.indexOf(image), 1)
-
-      await Client.updateOne({ _id: clientId }, { $set: { files: newFileList } })
-
-      fs.unlinkSync(`/usr/app/tmp/${image}`)
+      if (files) {
+        files.splice(files.indexOf(image), 1)
+        fs.unlinkSync(`/usr/app/tmp/${image}`)
+        await Client.updateOne({ _id: clientId }, { $set: { files } })
+      }
 
       res.status(200).send({ message: 'Is image removed!' })
     } catch (error) {

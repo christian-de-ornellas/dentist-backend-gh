@@ -14,6 +14,8 @@ import { Router } from 'express'
 
 const routes = Router()
 
+routes.use(checkAuthJwt)
+
 // Reply
 routes.get('/replys', ReplysController.index)
 routes.delete('/reply/:id', ReplysController.delete)

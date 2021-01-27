@@ -14,6 +14,10 @@ import { Router } from 'express'
 
 const routes = Router()
 
+//Routes Public
+routes.post('/login', AuthController.store)
+
+// Routes Private
 routes.use(checkAuthJwt)
 
 // Reply
@@ -36,7 +40,6 @@ routes.post(
 )
 
 routes.get('/dashboard', DashboardController.index)
-routes.post('/login', AuthController.store)
 routes.post(
   '/users',
   celebrate({

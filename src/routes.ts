@@ -14,17 +14,14 @@ import { Router } from 'express'
 
 const routes = Router()
 
-//Routes Public
 routes.post('/login', AuthController.store)
 
-// Routes Private
-routes.use(checkAuthJwt)
-
 // Reply
-routes.get('/replys', ReplysController.index)
-routes.delete('/reply/:id', ReplysController.delete)
+routes.get('/replys', checkAuthJwt, ReplysController.index)
+routes.delete('/reply/:id', checkAuthJwt, ReplysController.delete)
 routes.post(
   '/reply',
+  checkAuthJwt,
   celebrate({
     [Segments.BODY]: Joi.object().keys({
       form: Joi.string().required(),
@@ -39,9 +36,10 @@ routes.post(
   ReplysController.store
 )
 
-routes.get('/dashboard', DashboardController.index)
+routes.get('/dashboard', checkAuthJwt, DashboardController.index)
 routes.post(
   '/users',
+  checkAuthJwt,
   celebrate({
     [Segments.BODY]: Joi.object().keys({
       firstName: Joi.string().required(),
@@ -56,19 +54,20 @@ routes.post(
 
 // TusksController
 
-routes.get('/tusks', TusksController.index)
-routes.delete('/tusks/:id', TusksController.delete)
-routes.post('/tusks', TusksController.store)
+routes.get('/tusks', checkAuthJwt, TusksController.index)
+routes.delete('/tusks/:id', checkAuthJwt, TusksController.delete)
+routes.post('/tusks', checkAuthJwt, TusksController.store)
 
 // UsersController
-routes.get('/users', UsersController.index)
-routes.get('/users/:id', UsersController.search)
-routes.delete('/users/:id', UsersController.delete)
-routes.put('/users/:id', UsersController.update)
+routes.get('/users', checkAuthJwt, UsersController.index)
+routes.get('/users/:id', checkAuthJwt, UsersController.search)
+routes.delete('/users/:id', checkAuthJwt, UsersController.delete)
+routes.put('/users/:id', checkAuthJwt, UsersController.update)
 
 // ClientsController
 routes.post(
   '/clients',
+  checkAuthJwt,
   celebrate({
     [Segments.BODY]: Joi.object().keys({
       firstName: Joi.string().required(),
@@ -91,15 +90,16 @@ routes.post(
   ClientsController.store
 )
 
-routes.get('/clients', ClientsController.index)
-routes.get('/clients/search', ClientsController.search)
-routes.put('/clients/:id', ClientsController.update)
-routes.delete('/clients/:id', ClientsController.delete)
+routes.get('/clients', checkAuthJwt, ClientsController.index)
+routes.get('/clients/search', checkAuthJwt, ClientsController.search)
+routes.put('/clients/:id', checkAuthJwt, ClientsController.update)
+routes.delete('/clients/:id', checkAuthJwt, ClientsController.delete)
 
 // FormsController
-routes.get('/forms', FormsController.index)
+routes.get('/forms', checkAuthJwt, FormsController.index)
 routes.post(
   '/forms',
+  checkAuthJwt,
   celebrate({
     [Segments.BODY]: Joi.object().keys({
       user: Joi.string().required(),
@@ -109,14 +109,15 @@ routes.post(
   }),
   FormsController.store
 )
-routes.put('/forms/:id', FormsController.update)
-routes.delete('/forms/:id', FormsController.delete)
+routes.put('/forms/:id', checkAuthJwt, FormsController.update)
+routes.delete('/forms/:id', checkAuthJwt, FormsController.delete)
 
 // QuestionsController
-routes.get('/questions', QuestionsController.index)
-routes.get('/questions/all', QuestionsController.all)
+routes.get('/questions', checkAuthJwt, QuestionsController.index)
+routes.get('/questions/all', checkAuthJwt, QuestionsController.all)
 routes.post(
   '/questions',
+  checkAuthJwt,
   celebrate({
     [Segments.BODY]: Joi.object().keys({
       form: Joi.string().required(),
@@ -144,15 +145,16 @@ routes.post(
   }),
   QuestionsController.store
 )
-routes.put('/questions/:id', QuestionsController.update)
-routes.delete('/questions/:id', QuestionsController.delete)
+routes.put('/questions/:id', checkAuthJwt, QuestionsController.update)
+routes.delete('/questions/:id', checkAuthJwt, QuestionsController.delete)
 
-routes.get('/answers', ReplysController.answers)
+routes.get('/answers', checkAuthJwt, ReplysController.answers)
 
 //TermsController
-routes.get('/terms', TermsController.index)
+routes.get('/terms', checkAuthJwt, TermsController.index)
 routes.post(
   '/terms',
+  checkAuthJwt,
   celebrate({
     [Segments.BODY]: Joi.object().keys({
       client: Joi.string().required(),
@@ -163,9 +165,9 @@ routes.post(
   TermsController.store
 )
 
-routes.delete('/terms/:id', TermsController.delete)
+routes.delete('/terms/:id', checkAuthJwt, TermsController.delete)
 
-routes.post('/images', ImagesController.store)
-routes.delete('/remove', ImagesController.delete)
+routes.post('/images', checkAuthJwt, ImagesController.store)
+routes.delete('/remove', checkAuthJwt, ImagesController.delete)
 
 export default routes
